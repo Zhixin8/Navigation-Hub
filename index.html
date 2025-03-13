@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jockiery Navigation Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #46464625;
+            color: #3e7bfa;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .header-card {
+            
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        
+        .site-title {
+            font-size: 24px;
+            color: #3e7bfa;
+            font-weight: bold;
+        }
+        
+        .datetime {
+            text-align: right;
+        }
+        
+        .date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .time {
+            color: #3e7bfa;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quote-card {
+            text-align: right;
+            grid-column: 1 / -1;
+        }
+        
+        .quote {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .quote-author {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .link-card {
+            display: flex;
+            align-items: center;
+        }
+        
+        .link-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            color: #3e7bfa;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .link-content {
+            flex-grow: 1;
+        }
+        
+        .link-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .link-subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            width: 100%;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .site-description {
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            backdrop-filter: blur(10px);
+        }
+        
+        .site-description h2 {
+            color: #3e7bfa;
+            margin-bottom: 10px;
+        }
+        
+        .site-description p {
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .datetime {
+                margin-top: 15px;
+                text-align: center;
+            }
+        
+            .container {
+                padding: 10px;
+            }
+        
+            body {
+                padding: 10px;
+            }
+        
+            .site-title {
+                font-size: 20px;
+            }
+        
+            .time {
+                font-size: 24px;
+            }
+        
+            .card {
+                padding: 12px;
+            }
+        
+            .link-icon {
+                font-size: 20px;
+                width: 25px;
+            }
+        
+            .link-title {
+                font-size: 16px;
+            }
+        
+            .link-subtitle {
+                font-size: 13px;
+            }
+        
+            .quote {
+                font-size: 14px;
+            }
+        
+            .quote-author {
+                font-size: 13px;
+            }
+        
+            .site-description h2 {
+                font-size: 18px;
+            }
+        
+            .site-description p {
+                font-size: 14px;
+            }
+        
+            .text-expansion h3 {
+                font-size: 18px;
+            }
+        
+            #personal-intro {
+                font-size: 14px;
+            }
+        
+            .footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-card">
+            <div class="profile">
+                <img src="头像.jpg" alt="Profile" class="profile-img">
+                <div class="site-title">Jockiery Navigation Hub</div>
+            </div>
+            <div class="datetime">
+                <div class="date" id="current-date">Thursday, December 19, 2024</div>
+                <div class="time" id="current-time">16:35:56</div>
+            </div>
+        </div>
+        
+        <div class="site-description">
+            <h2>Welcome to My Personal Navigation Hub</h2>
+            <p>Welcome to my personal navigation hub, where I showcase my projects and digital footprint. As a tech enthusiast, I've created this space not just as a link collection, but as a gateway to connect and explore the digital world together.</p>
+        </div>
+        
+        <div class="card-grid">
+            
+            <div class="card quote-card">
+                <p class="quote" id="random-quote">So I release my fist to hold a pen, as myself, as a human, and as you.</p>
+                <p class="quote-author" id="quote-author">—— Er Shi</p>
+            </div>
+            <a href="https://jockiery.online/" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-blog"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Blog</div>
+                    <div class="link-subtitle">Personal blog, recording life moments and thoughts</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Here I record my daily thoughts, technical notes, and life moments, updated periodically</div>
+                </div>
+            </a>
+
+            <a href="https://dh.jockiery.online/" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Navigation Site</div>
+                    <div class="link-subtitle">Curated website collection for improved browsing efficiency</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">A carefully curated collection of high-quality websites to enhance your web surfing efficiency</div>
+                </div>
+            </a>
+          
+            <a href="https://jociery.notion.site/" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Digital Garden</div>
+                    <div class="link-subtitle">A personal homepage project built with Notion</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">My knowledge management system, including notes, projects, and various resource organizations</div>
+                </div>
+            </a>
+
+            <a href="https://img.jockiery.online/" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Image Hosting</div>
+                    <div class="link-subtitle">A TG-based image hosting service for blog images, auth password: 666666</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Telegram-based image storage service, supporting quick upload and sharing</div>
+                </div>
+            </a>
+
+            <a href="https://whimsical.com/jockiery-nZCC9aHF1Lxo3CgWxkcb5" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Frequently Used Software</div>
+                    <div class="link-subtitle">Recording the software and apps I frequently use</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Many software just need specific functionality without unnecessary features</div>
+                </div>
+            </a>
+
+            <a href="https://wall.jockiery.online/" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Photo Gallery</div>
+                    <div class="link-subtitle">Capturing moments through photography</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">My photography portfolio, documenting beautiful moments and interesting scenes in life</div>
+                </div>
+            </a>
+
+            <a href="https://x.com/Jockiery" class="card link-card">
+                <div class="link-icon">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">Twitter(X)</div>
+                    <div class="link-subtitle">Social Media</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Casually recording random thoughts, haven't felt much motivation to post since closing WeChat Moments</div>
+                </div>
+            </a>
+
+            <a href="mailto:jockiery@outlook.com" class="card link-card">
+                <div class="link-icon">
+                    <i class="fas fa-envelope-open-text"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">My Email</div>
+                    <div class="link-subtitle">Preferred way to contact me</div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Feel free to contact me for any questions, suggestions, or collaboration opportunities</div>
+                </div>
+            </a>
+        </div>
+        
+        <div class="text-expansion" style="background-color: rgba(255, 255, 255, 0.85); border-radius: 12px; padding: 15px; margin-top: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px);">
+            <h3 style="color: #3e7bfa; margin-bottom: 10px; text-align: center;" >About Me</h3>
+            <p id="personal-intro" style="color: #666; line-height: 1.6; text-align: center;"></p>
+            <script>
+                const introductions = [
+                    "Passionate about technology and innovation, always eager to explore new things. In my spare time, I enjoy coding, reading, and photography, hoping to change lives through technology.",
+                    "A lifelong learner dedicated to learning, believing that knowledge changes destiny. Love sharing and hope to help more people.",
+                    "Enjoy recording life through words and capturing beauty through the lens. Always maintaining curiosity about the world and enjoying the joy of discovery.",
+                    "Enthusiastic about exploring the possibilities of the digital world while seeking balance in real life. Welcome to exchange and share with me.",
+                    "Live simply, work happily. Believe in the power of continuous learning and accumulation, enjoying the process of creation and sharing."
+                ];
+                
+                function updateIntro() {
+                    const randomIndex = Math.floor(Math.random() * introductions.length);
+                    document.getElementById('personal-intro').textContent = introductions[randomIndex];
+                }
+                
+                updateIntro();
+                setInterval(updateIntro, 30000);
+            </script>
+        </div>
+        
+        <div class="footer">
+            <p>Copyright © 2020 - 2025 & Made by Jockiery | Thank you for visiting</p>
+        </div>
+    </div>
+    
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const weekday = weekdays[now.getDay()];
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('current-date').textContent = `${weekday}, ${month}/${day}/${year}`;
+            document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+        
+        function displayRandomQuote() {
+            const quotes = [
+                { text: "So I release my fist to hold a pen, as myself, as a human, and as you.", author: "—— Er Shi" },
+                { text: "Life is not about waiting for the storm to pass, but learning to dance in the rain.", author: "—— Vivian Greene" },
+                { text: "Life is like riding a bicycle. To keep your balance, you must keep moving.", author: "—— Albert Einstein" },
+                { text: "There is only one heroism in the world: to see the world as it is and to love it.", author: "—— Romain Rolland" },
+                { text: "Don't wait for opportunity, create it.", author: "—— Abraham Lincoln" },
+                { text: "Success is not something of the future, it's built continuously from the moment you decide to act.", author: "—— Anonymous" },
+                { text: "When things are at their most difficult is when success is nearest.", author: "—— Napoleon Hill" },
+                { text: "A person's life can either burn or decay. I cannot decay, I choose to burn brightly.", author: "—— Nikolai Ostrovsky" },
+                { text: "No one can go back and make a brand new start, but anyone can start from now and make a brand new ending.", author: "—— Maria Robinson" },
+                { text: "The most important thing in life is to have a great aim and the determination to attain it.", author: "—— Johann Wolfgang von Goethe" }
+            ];
+            
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
+            
+            document.getElementById('random-quote').textContent = randomQuote.text;
+            document.getElementById('quote-author').textContent = randomQuote.author;
+        }
+        
+        displayRandomQuote();
+    </script>
+</body>
+</html>
